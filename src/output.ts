@@ -29,7 +29,6 @@ type Clip = {
 	x2: number | undefined;
 	y1: number | undefined;
 	y2: number | undefined;
-	overflowToBackbuffer?: boolean;
 };
 
 export type Region = {
@@ -379,8 +378,6 @@ export default class Output {
 					: nextClip.y2 === undefined
 						? previousClip.y2
 						: Math.min(previousClip.y2, nextClip.y2);
-
-			nextClip.overflowToBackbuffer ??= previousClip.overflowToBackbuffer;
 		}
 
 		this.clips.push(nextClip);
@@ -695,7 +692,9 @@ export default class Output {
 		}
 
 		if (clipVertically) {
-			const effectiveY1 = clip.overflowToBackbuffer ? -Infinity : clip.y1!;
+			const effectiveY1 = this.getActiveRegion().overflowToBackbuffer
+				? -Infinity
+				: clip.y1!;
 
 			if (y < effectiveY1 || y >= clip.y2!) {
 				return undefined;

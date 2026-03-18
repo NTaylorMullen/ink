@@ -397,9 +397,7 @@ function renderNodeToOutput(
 
 			const clipLeft = clip.x1 ?? -Infinity;
 			const clipRight = clip.x2 ?? Infinity;
-			const clipTop = clip.overflowToBackbuffer
-				? -Infinity
-				: (clip.y1 ?? -Infinity);
+			const clipTop = clip.y1 ?? -Infinity;
 			const clipBottom = clip.y2 ?? Infinity;
 
 			const isVisible =
@@ -1118,7 +1116,6 @@ function renderNodeToOutput(
 					x2,
 					y1,
 					y2,
-					overflowToBackbuffer: node.style.overflowToBackbuffer,
 				});
 				clipped = true;
 			}

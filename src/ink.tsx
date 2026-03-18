@@ -387,6 +387,8 @@ export default class Ink {
 				void this.terminalBuffer.render();
 			}
 
+			this.callOnRender(startTime, output, staticOutput);
+
 			return;
 		}
 

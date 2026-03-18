@@ -213,7 +213,7 @@ export class Compositor {
 		clip: Rect,
 	) {
 		if (
-			(this.options.skipScrollbars ?? false) ||
+			Boolean(this.options.skipScrollbars && region.overflowToBackbuffer) ||
 			!region.isScrollable ||
 			region.scrollbarVisible === false
 		) {
